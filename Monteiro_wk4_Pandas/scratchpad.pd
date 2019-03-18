@@ -1,0 +1,20 @@
+# school_data_complete.head()                                  # Test Run to see what the data frame looks like
+# school_data_complete['school_name'].unique()                 # Test Run to see the unique names are, just to make sure I have the right count
+# school_data_complete['school_name'].value_counts()           # Test Run to see total number of students by school
+# school_data_complete['school_name'].nunique()                # This function produces *TOTAL NUMBER OF SCHOOLS*
+# school_data_complete['Student ID'].nunique()                 # This function produces *TOTAL NUMBER OF STUDENTS*
+# school_data_complete['budget'].unique()                      # Test Run This function pulls the budget total for each school
+
+# df_school_budgets = school_data_complete['budget'].unique()  # Stores all individual school budgets as array
+# df_school_budgets.sum()                                      # Sums individual school budgets // still need to format as $$
+
+# school_data_complete['math_score'].mean()                    #
+# school_data_complete['reading_score'].mean()                 #
+# school_data_complete['reading_score'].sum() >= 70
+school_data_complete['Reading Score'] = pd.cut(school_data_complete['reading_score'], bins, labels=pass_fail)
+school_data_complete['Math Score'] = pd.cut(school_data_complete['math_score'], bins, labels=pass_fail)
+reading_score_df = school_data_complete['Reading Score'].value_counts() 
+math_score_df = school_data_complete['Math Score'].value_counts() 
+
+print(reading_score_df)
+print(math_score_df)
