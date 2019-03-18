@@ -297,8 +297,49 @@ school_reading_by_grade
 
 
 
+#_____________________________________________________________________________________
+#_____________________________________________________________________________________
+
+
+bins = [0, 585, 620, 650, 675]
+group_names = ["<$585", "$585-620", "$620-650", "$645-660"]
+
+#_____________________________________________________________________________________
+#_____________________________________________________________________________________
+
+
+school_data_finalreport.head()
+
+#_____________________________________________________________________________________
+#_____________________________________________________________________________________
+
+
+
+school_data_finalreport['Spending Ranges (Per Student)'] = pd.cut(school_data_finalreport["Per Student Budget"], bins, labels=group_names)
+school_data_studentcostbin = school_data_finalreport.drop(columns=['Total Students','Total School Budget','Per Student Budget'])
+school_data_studentcostbin.groupby(['Spending Ranges (Per Student)']).mean()
+
+
+
+#_____________________________________________________________________________________
+#_____________________________________________________________________________________
+
+
+# Sample bins. Feel free to create your own bins.
+size_bins = [0, 1000, 3000, 5000]
+group_names = ["Tall", "Grande", "Venti"]
+
+school_data_finalreport['School Size'] = pd.cut(school_data_finalreport['Total Students'], size_bins, labels=group_names)
+school_data_studentsizebin = school_data_finalreport.drop(columns=['Total Students','Total School Budget','Per Student Budget'])
+school_data_studentsizebin.groupby(['School Size']).mean()
+
+#_____________________________________________________________________________________
+#_____________________________________________________________________________________
 
 
 
 
-school_data_semi_arranged['Total School Budget'] = pd.to_numeric(school_data_semi_arranged['Total School Budget'])
+school_data_typereport = school_data_finalreport.drop(columns=['Total Students','Total School Budget','Per Student Budget'])
+school_data_typereport.groupby(['School Type']).mean()
+
+
