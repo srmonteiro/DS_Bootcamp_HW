@@ -1,4 +1,21 @@
 
+Virtual Environments _________________________________________________________
+
+    source activate PythonDataScience
+    conda install -c conda-forge gmaps
+    jupyter nbextension enable --py gmaps
+    jupyter notebook list
+    jupyter notebook stop
+    pip install
+    pip list
+
+#___jupyter shortcuts_______________________
+    b  # new row below
+    a  # new row above
+    dd # Delete row
+    shift + enter  
+
+
 
 MPLib MODULES _______________________________________________________________________
 
@@ -30,6 +47,9 @@ MPLib / Pandas Manipulators ____________________________________________________
     pd.merge(file1, file2, on='column name')                                         # or if col name diff // left_on = "colname"    right_on = "col name"
     del df['column']
     df.rename(columns={'column original':'Country Code'})
+    df.shape                                                                         # number of rows, number of columns in a dataframe
+    df.isna().sum()                                                                  # count of NaN missing values in each column
+    df.dtypes                                                                        # the type of content in each column
 
 MPLib PLOT TYPES ____________________________________________________________________
 
@@ -101,10 +121,16 @@ Pandas & MPLib PLOT ____________________________________________________________
 
 #  #   
 
-#  #   
+#  #   params = {                          #  Storing details as a dictionary to pass into url
+#               ""
+# 
+#               }
 
 #  #   
 
 #  #   
 
 #  #   
+
+
+
