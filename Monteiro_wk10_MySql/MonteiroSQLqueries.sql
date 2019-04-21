@@ -323,7 +323,7 @@ LIMIT 5;
 #     If you haven't solved 7h, you can substitute another query to create a view.
 #__________________________________________________________________________________________________  27 of 29 EX  ____
 
-CREATE VIEW genre_revenue AS
+CREATE VIEW top_five_genres AS
 SELECT cat.name AS 'Genre', concat('$', format(sum(p.amount), 2)) AS 'Gross' 
 FROM category cat
 JOIN film_category fcat
@@ -342,12 +342,12 @@ LIMIT 5;
 # 8b. How would you display the view that you created in 8a?
 #__________________________________________________________________________________________________  28 of 29 EX  ____
 
-SELECT * FROM genre_revenue;
+SELECT * FROM top_five_genres;
 
 
 # 8c. You find that you no longer need the view top_five_genres. Write a query to delete it.
 #__________________________________________________________________________________________________  29 of 29 EX  ____
 
-DROP VIEW genre_revenue;
+DROP VIEW top_five_genres;
 
 # _______________________________________   FIN   ____________________________________________________________________
