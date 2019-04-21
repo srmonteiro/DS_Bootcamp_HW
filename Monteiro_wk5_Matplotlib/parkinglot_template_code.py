@@ -1,3 +1,12 @@
+###
+
+Terminal Commands _________________________________________________________
+
+    cd  
+    ls 
+    touch 
+    mv  
+
 
 Virtual Environments _________________________________________________________
 
@@ -39,6 +48,7 @@ MPLib / Pandas Manipulators ____________________________________________________
     df['column name'].unique()
     df.add(otherdf, fill_value = 0)
     df.groupby()
+    df.groupby().agg({})
     df.keys
     df.set_index('column name')
     df.loc
@@ -50,6 +60,7 @@ MPLib / Pandas Manipulators ____________________________________________________
     df.shape                                                                         # number of rows, number of columns in a dataframe
     df.isna().sum()                                                                  # count of NaN missing values in each column
     df.dtypes                                                                        # the type of content in each column
+
 
 MPLib PLOT TYPES ____________________________________________________________________
 
@@ -131,6 +142,84 @@ Pandas & MPLib PLOT ____________________________________________________________
 #  #   
 
 #  #   
+
+###
+
+MySQL ________________________________________________
+
+    shell> mysql --help
+    shell> mysql -h host -u user -p
+    Enter password: ********
+    mysql> QUIT
+
+Hypothesis testing ________________________________
+
+    Hypothesis (Educated Guess)
+    Null Hypothesis (Framing hypothesis as a negative answer)
+    Perform test 
+    Get p-value
+
+    stats.ttest_ind( , , equal_var=False)
+
+
+###
+
+#### MySQL Template Code!!!
+
+LAUNCHING MySQL from Terminal ________________________________
+
+    echo 'export PATH="$PATH:/usr/local/mysql/bin"' >> ~/.bash_profile
+    source ~/.bash_profile
+    mysql -u root -p
+
+Database ________________________________
+
+    CREATE DATABASE <db name>;
+    DROP DATABASE <db name>;
+    USE <db name>;
+    CREATE TABLE <table name> (
+        col_1 DATATYPE BOOLEAN, 
+        col_2 DATATYPE BOOLEAN,
+        col_3 DATATYPE BOOLEAN,
+        col_4 DATATYPE BOOLEAN
+    )
+
+VEIWING & Manipulating TABLES ________________________________
+
+    SELECT * FROM <db name>;
+
+    example:
+        INSERT INTO people (name, has_pet, pet_name, pet_age)
+        VALUES ("Jacob", true, "Misty", 10);
+
+    UPDATE <table>
+    SET <field> command
+    WHERE <field> = "value"
+
+    DELETE from <table>
+    Where <field> = "value";
+
+JOINING SQL TABLES ________________________________
+
+    INNER JOIN <table 1> on <table 2>.<column ID 1> =  
+    LEFT JOIN
+    RIGHT JOIN
+
+    example: 
+         SELECT column(s) FROM table_1
+         INNER JOIN table_2
+         ON table_1.column_name = table_2.column_name;
+
+QUERIES ________________________________
+
+    SELECT * FROM table_1
+    WHERE column_a = value;  ##  AND , OR , IN , NOT IN
+
+
+
+
+
+
 
 
 
