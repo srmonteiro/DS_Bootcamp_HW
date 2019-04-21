@@ -245,16 +245,17 @@ Where cnt.country = 'Canada';
 #     for a promotion. Identify all movies categorized as family films.
 #_____________________________________________________________________________________________________  22 of 29 EX  ____
 
-SELECT title as 'Title'
+SELECT title as 'Family Film Titles'
 FROM film 
 WHERE film_id IN
-(
-SELECT film_id FROM film_category
-WHERE category_id IN
-(
-SELECT category_id FROM category
-WHERE name = "Family"
-));
+  (
+  SELECT film_id FROM film_category
+  WHERE category_id IN
+  (
+  SELECT category_id FROM category
+  WHERE name = "Family"
+  )
+  );
 
 
 # 7e. Display the most frequently rented movies in descending order.
@@ -265,7 +266,7 @@ FROM rental r
 JOIN inventory i
 ON r.inventory_id = i.inventory_id
 JOIN film f
-ON (i.film_id = f.film_id)
+ON i.film_id = f.film_id
 GROUP BY f.title
 ORDER BY COUNT(rental_id) DESC;
 
@@ -276,11 +277,11 @@ ORDER BY COUNT(rental_id) DESC;
 SELECT s.store_id as 'Store ID', concat('$', format(sum(amount), 2)) AS 'Revenue'
 FROM payment p
 JOIN rental r
-ON (p.rental_id = r.rental_id)
+ON p.rental_id = r.rental_id
 JOIN inventory i
-ON (i.inventory_id = r.inventory_id)
+ON i.inventory_id = r.inventory_id
 JOIN store s
-ON (s.store_id = i.store_id)
+ON s.store_id = i.store_id
 GROUP BY s.store_id; 
  # but have diff exchange rates, so we might need an extra calc converting
  # each sale by date into one or some third currency
