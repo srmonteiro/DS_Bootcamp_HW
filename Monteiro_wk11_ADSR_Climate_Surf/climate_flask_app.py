@@ -133,33 +133,35 @@ def date(start_date): # , end_date):
     one_year = dt.timedelta(days=365)
     year_ago = last_day - one_year
 
-    last_year_readings = session.query(Measurement.date, Measurement.prcp,Measurement.tobs).\
+    last_year_to_date_tobs_readings = session.query(Measurement.tobs).\
         filter(Measurement.date >= year_ago).order_by(Measurement.date.desc()).all()
      
-    for reading in last_year_readings:
-        search_start = reading['date']
+    #for reading in last_year_to_date_tobs_readings:
+        
+    for reading in last_year_to_date_tobs_readings:
 
-        if search_start == start_date:
+        if last_year_to_date_tobs_readings['date'] == start_date:
+            print({last_year_to_date_tobs_readings['tobs']})
             print("You're on the right track")
 
-       # TMIN = session.query(func.min(Measurement.tobs)).\
-        #    filter(Measurement.date >= start_date).\
-         #   order_by(Measurement.date.desc()).all() 
+    # TMIN = session.query(func.min(Measurement.tobs)).\
+    #    filter(Measurement.date >= start_date).\
+        #   order_by(Measurement.date.desc()).all() 
 
-        #TMAX = session.query(func.max(Measurement.tobs)).\
-         #   filter(Measurement.date >= start_date).\
-          #  order_by(Measurement.date.desc()).all() 
+    #TMAX = session.query(func.max(Measurement.tobs)).\
+        #   filter(Measurement.date >= start_date).\
+        #  order_by(Measurement.date.desc()).all() 
 
-        #TAVG = session.query(func.avg(Measurement.tobs)).\
-         #   filter(Measurement.date >= start_date).\
-          #  order_by(Measurement.date.desc()).all() 
+    #TAVG = session.query(func.avg(Measurement.tobs)).\
+        #   filter(Measurement.date >= start_date).\
+        #  order_by(Measurement.date.desc()).all() 
 
-      #  print(f'Since {start_date} the Temp Low was {TMIN}, the Temp High was {TMAX}, and the Average Temp was {TAVG}')
+    #  print(f'Since {start_date} the Temp Low was {TMIN}, the Temp High was {TMAX}, and the Average Temp was {TAVG}')
 
-        else: 
-            return jsonify({"Error: Somethings wrong with your search or our engine ¯\_(ツ)_/¯"})
+    else: 
+        return jsonify({"Error: Somethings wrong with your search or our engine ¯\_(ツ)_/¯"})
 
-    return jsonify(print('Oh, Hello')), 404
+    #return jsonify(print('Oh, Hello')), 404
 
 
 if __name__ == "__main__":
