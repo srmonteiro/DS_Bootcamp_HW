@@ -83,12 +83,19 @@ def precipitation():
 @app.route("/api/v1.0/stations")
 def stations():
     
-    stations_list = session.query(Measurement.station,)\
-        .group_by(Measurement.station).order_by(func.count(Measurement.id).desc()).all()
-
-    stations = list(np.ravel(stations_list))
+    stations_list = session.query(Station.id, Station.station, Station.name, Station.latitude, Station.longitude, Station.elevation).all()
     
-    return jsonify(stations)
+    stations_json = []
+    for Station.id, Station.station, Station.name, Station.latitude, Station.longitude, Station.elevation in stations_list:
+        station_dict = {}
+        station_dict["id"] = Station.id
+        station_dict["name"] = Station.name
+        station_dict["latitude"] = Station.latitude
+        station_dict["longitude"] = Station.longitude
+        station_dict["elevation"] = Station.elevation
+        stations_json.append(station_dict)
+    
+    return jsonify(stations_json)
 
 #/api/v1.0/tobs
 #query for the dates and temperature observations from a year from the last data point.
@@ -106,13 +113,19 @@ def tobs():
     one_year = dt.timedelta(days=365)
     year_ago = last_day - one_year
 
-    last_year_tobs = session.query(Measurement.date, Measurement.tobs).\
+    last_year_tobs = session.query(Measurement.date, Measurement.station, Measurement.tobs).\
         filter(Measurement.date >= year_ago).\
         order_by(Measurement.date.desc()).all()
-        
-    temperature_obs = list(np.ravel(last_year_tobs))
+
+    temps_json = []
+    for Measurement.date, Measurement.station, Measurement.tobs in last_year_tobs:
+        temp_dict = {}
+        temp_dict["date"] = Measurement.date
+        temp_dict["station"] = Measurement.station
+        temp_dict["temp"] = Measurement.tobs
+        temps_json.append(temp_dict)                             
     
-    return jsonify(temperature_obs)
+    return jsonify(temps_json)
 
 # /api/v1.0/<start> and /api/v1.0/<start>/<end>
 
@@ -120,45 +133,26 @@ def tobs():
 # When given the start only, calculate TMIN, TAVG, and TMAX for all dates greater than and equal to the start date.
 # When given the start and the end date, calculate the TMIN, TAVG, and TMAX for dates between the start and end date inclusive.
 
-@app.route("/api/v1.0/<start_date>") # /<end_date>")
-def date(start_date): # , end_date):
+@app.route("/api/v1.0/<start>") # /<end_date>")
 
-    results = session.query(Measurement.date).order_by(Measurement.date.desc()).all()
+# Thank you to Karen Gutzman for coaching me through this syntax! I was so stuck!
 
-    last_date = [result[2] for result in results[:1]]
-    last_day = dt.datetime.strptime(last_date[0], "%Y-%m-%d")
-    one_year = dt.timedelta(days=365)
-    year_ago = last_day - one_year
+def app_start_date(start): # , end_date):
 
-    last_year_to_date_tobs_readings = session.query(Measurement.tobs).\
-        filter(Measurement.date >= year_ago).order_by(Measurement.date.desc()).all()
-     
-    #for reading in last_year_to_date_tobs_readings:
-        
-    for reading in last_year_to_date_tobs_readings:
+    trip_start = calc_starttemps(start)
+    trip_start_list = trip_start[0]
+    temp_min = trip_start_list[0]
+    temp_avg = trip_start_list[1]
+    temp_max = trip_start_list[2]
+    temp_dict = dict({'Min': temp_min, 'Avg': temp_avg, 'Max': temp_max })
 
-        if last_year_to_date_tobs_readings['date'] == start_date:
-            print({last_year_to_date_tobs_readings['tobs']})
-            print("You're on the right track")
+    return jsonify(temp_dict)
 
-            # TMIN = session.query(func.min(Measurement.tobs)).\
-            #    filter(Measurement.date >= start_date).\
-                #   order_by(Measurement.date.desc()).all() 
+def calc_starttemps(start_date):
+      
+    return session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
+        filter(Measurement.date >= start_date).all()
 
-            #TMAX = session.query(func.max(Measurement.tobs)).\
-                #   filter(Measurement.date >= start_date).\
-                #  order_by(Measurement.date.desc()).all() 
-
-            #TAVG = session.query(func.avg(Measurement.tobs)).\
-                #   filter(Measurement.date >= start_date).\
-                #  order_by(Measurement.date.desc()).all() 
-
-    #  print(f'Since {start_date} the Temp Low was {TMIN}, the Temp High was {TMAX}, and the Average Temp was {TAVG}')
-
-        else: 
-            return jsonify({"Error: Somethings wrong with your search or our engine ¯\_(ツ)_/¯"})
-
-    #return jsonify(print('Oh, Hello')), 404
 
 
 if __name__ == "__main__":
