@@ -46,9 +46,9 @@ def home():
     return (
         f"Available Routes:<br/>"
         f"/api/v1.0/precipitation<br/>"
-        f"/api/v1.0/stations"
-        f"/api/v1.0/tobs"
-        f"/api/v1.0/<start>/<end>"
+        f"/api/v1.0/stations<br/>"
+        f"/api/v1.0/tobs<br/>"
+        f"/api/v1.0/%start%/%end%<br/>"
     )
     print("Server received request for 'Home' page...")
     return "Welcome to my 'Home' page!"
@@ -123,10 +123,44 @@ def tobs():
 # When given the start only, calculate TMIN, TAVG, and TMAX for all dates greater than and equal to the start date.
 # When given the start and the end date, calculate the TMIN, TAVG, and TMAX for dates between the start and end date inclusive.
 
-@app.route("/api/v1.0/<start>/<end>")
-def date():
-    print("Server received request for 'Home' page...")
-    return "Welcome to my 'Home' page!"
+@app.route("/api/v1.0/<start_date>") # /<end_date>")
+def date(start_date): # , end_date):
+
+    results = session.query(Measurement.date).order_by(Measurement.date.desc()).all()
+
+    last_date = [result[2] for result in results[:1]]
+    last_day = dt.datetime.strptime(last_date[0], "%Y-%m-%d")
+    one_year = dt.timedelta(days=365)
+    year_ago = last_day - one_year
+
+    last_year_readings = session.query(Measurement.date, Measurement.prcp,Measurement.tobs).\
+        filter(Measurement.date >= year_ago).order_by(Measurement.date.desc()).all()
+     
+    for reading in last_year_readings:
+        search_start = reading['date']
+
+        if search_start == start_date:
+            print("Your on the right track")
+
+       # TMIN = session.query(func.min(Measurement.tobs)).\
+        #    filter(Measurement.date >= start_date).\
+         #   order_by(Measurement.date.desc()).all() 
+
+        #TMAX = session.query(func.max(Measurement.tobs)).\
+         #   filter(Measurement.date >= start_date).\
+          #  order_by(Measurement.date.desc()).all() 
+
+        #TAVG = session.query(func.avg(Measurement.tobs)).\
+         #   filter(Measurement.date >= start_date).\
+          #  order_by(Measurement.date.desc()).all() 
+
+      #  print(f'Since {start_date} the Temp Low was {TMIN}, the Temp High was {TMAX}, and the Average Temp was {TAVG}')
+
+        else: 
+            return jsonify({"Error: Somethings wrong with your search or our engine ¯\_(ツ)_/¯"})
+
+    return jsonify(print('Oh, Hello')), 404
+
 
 if __name__ == "__main__":
     app.run(debug=True)
