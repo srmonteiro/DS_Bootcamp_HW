@@ -140,7 +140,7 @@ def date(start_date): # , end_date):
         search_start = reading['date']
 
         if search_start == start_date:
-            print("Your on the right track")
+            print("You're on the right track")
 
        # TMIN = session.query(func.min(Measurement.tobs)).\
         #    filter(Measurement.date >= start_date).\
