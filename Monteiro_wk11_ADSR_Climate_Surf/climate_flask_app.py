@@ -49,9 +49,11 @@ def home():
         f"/api/v1.0/stations<br/>"
         f"/api/v1.0/tobs<br/>"
         f"/api/v1.0/%start%/%end%<br/>"
+        f"/api/v1.0/<start> <br/>"
+        f'enter start date as YYYY-MM-DD <br/>'
+        f"/api/v1.0/<start>/<end> <br/>"
+        f'enter start date as YYYY-MM-DD, "/", and end date as YYY-MM-DD'
     )
-    print("Server received request for 'Home' page...")
-    return "Welcome to my 'Home' page!"
 
 # /api/v1.0/precipitation
 # Convert the query results to a Dictionary using date as the key and prcp as the value.
@@ -59,25 +61,20 @@ def home():
 
 @app.route("/api/v1.0/precipitation")
 def precipitation():
-    
-# Identify Last Date, so you can find 1 year earlier
 
-    results = session.query(Measurement.id, Measurement.station, Measurement.date, Measurement.prcp,Measurement.tobs).\
+    results = session.query(Measurement.station, Measurement.date, Measurement.prcp).\
     order_by(Measurement.date.desc()).all()
 
-# Calculate the date 1 year ago from the last data point in the database
-    last_date = [result[2] for result in results[:1]]
-    last_day = dt.datetime.strptime(last_date[0], "%Y-%m-%d")
-    one_year = dt.timedelta(days=365)
-    year_ago = last_day - one_year
+    precipitation_json = []
+    for Measurement.date, Measurement.station, Measurement.prcp in results:
+        precipitation_dict = {}
+        precipitation_dict["date"] = Measurement.date
+        precipitation_dict["station"] = Measurement.station
+        precipitation_dict["prcp"] = Measurement.prcp
+        precipitation_json.append(precipitation_dict)
 
-    last_year_precipitation = session.query(Measurement.date, Measurement.prcp).\
-        filter(Measurement.date >= year_ago).\
-        order_by(Measurement.date.desc()).all()
-        
-    precipitation_obs = list(np.ravel(last_year_precipitation))
-    
-    return jsonify(precipitation_obs)
+    #return jsonify(station_precipitation)
+    return jsonify(precipitation_json)
 
 
 # /api/v1.0/stations
@@ -144,22 +141,22 @@ def date(start_date): # , end_date):
             print({last_year_to_date_tobs_readings['tobs']})
             print("You're on the right track")
 
-    # TMIN = session.query(func.min(Measurement.tobs)).\
-    #    filter(Measurement.date >= start_date).\
-        #   order_by(Measurement.date.desc()).all() 
+            # TMIN = session.query(func.min(Measurement.tobs)).\
+            #    filter(Measurement.date >= start_date).\
+                #   order_by(Measurement.date.desc()).all() 
 
-    #TMAX = session.query(func.max(Measurement.tobs)).\
-        #   filter(Measurement.date >= start_date).\
-        #  order_by(Measurement.date.desc()).all() 
+            #TMAX = session.query(func.max(Measurement.tobs)).\
+                #   filter(Measurement.date >= start_date).\
+                #  order_by(Measurement.date.desc()).all() 
 
-    #TAVG = session.query(func.avg(Measurement.tobs)).\
-        #   filter(Measurement.date >= start_date).\
-        #  order_by(Measurement.date.desc()).all() 
+            #TAVG = session.query(func.avg(Measurement.tobs)).\
+                #   filter(Measurement.date >= start_date).\
+                #  order_by(Measurement.date.desc()).all() 
 
     #  print(f'Since {start_date} the Temp Low was {TMIN}, the Temp High was {TMAX}, and the Average Temp was {TAVG}')
 
-    else: 
-        return jsonify({"Error: Somethings wrong with your search or our engine ¯\_(ツ)_/¯"})
+        else: 
+            return jsonify({"Error: Somethings wrong with your search or our engine ¯\_(ツ)_/¯"})
 
     #return jsonify(print('Oh, Hello')), 404
 
