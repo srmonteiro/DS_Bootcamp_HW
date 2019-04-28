@@ -1,5 +1,37 @@
 # For reference : http://127.0.0.1:5000/
-from flask import Flask
+import numpy as np
+import pandas as pd
+import datetime as dt
+
+import sqlalchemy
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import Session
+from sqlalchemy import create_engine, func
+
+from flask import Flask, jsonify
+
+
+#################################################
+# Database Setup
+#################################################
+engine = create_engine("sqlite:///Instructions/Resources/hawaii.sqlite")
+conn = engine.connect()
+
+# reflect an existing database into a new model
+Base = automap_base()
+# reflect the tables
+Base.prepare(engine, reflect=True)
+Base.classes.keys()
+# Save reference to the table
+Measurement = Base.classes.measurement
+Station = Base.classes.station
+# Create our session (link) from Python to the DB
+session = Session(engine)
+
+#################################################
+# Flask Setup
+#################################################
+
 
 app = Flask(__name__)
 
@@ -28,8 +60,22 @@ def home():
 @app.route("/api/v1.0/precipitation")
 def precipitation():
     
-    
-    precipitation_obs = list(np.ravel(annual_analysis))
+# Identify Last Date, so you can find 1 year earlier
+
+    results = session.query(Measurement.id, Measurement.station, Measurement.date, Measurement.prcp,Measurement.tobs).\
+    order_by(Measurement.date.desc()).all()
+
+# Calculate the date 1 year ago from the last data point in the database
+    last_date = [result[2] for result in results[:1]]
+    last_day = dt.datetime.strptime(last_date[0], "%Y-%m-%d")
+    one_year = dt.timedelta(days=365)
+    year_ago = last_day - one_year
+
+    last_year_precipitation = session.query(Measurement.date, Measurement.prcp).\
+        filter(Measurement.date >= year_ago).\
+        order_by(Measurement.date.desc()).all()
+        
+    precipitation_obs = list(np.ravel(last_year_precipitation))
     
     return jsonify(precipitation_obs)
 
@@ -40,8 +86,12 @@ def precipitation():
 @app.route("/api/v1.0/stations")
 def stations():
     
-    print("Server received request for 'Home' page...")
-    return "Welcome to my 'Home' page!"
+    stations_list = session.query(Measurement.station,)\
+        .group_by(Measurement.station).order_by(func.count(Measurement.id).desc()).all()
+
+    stations = list(np.ravel(stations_list))
+    
+    return jsonify(stations)
 
 #/api/v1.0/tobs
 #query for the dates and temperature observations from a year from the last data point.
@@ -51,8 +101,21 @@ def stations():
 @app.route("/api/v1.0/tobs")
 def tobs():
     
-    print("Server received request for 'Home' page...")
-    return "Welcome to my 'Home' page!"
+    results = session.query(Measurement.id, Measurement.station, Measurement.date, Measurement.prcp,Measurement.tobs).\
+    order_by(Measurement.date.desc()).all()
+
+    last_date = [result[2] for result in results[:1]]
+    last_day = dt.datetime.strptime(last_date[0], "%Y-%m-%d")
+    one_year = dt.timedelta(days=365)
+    year_ago = last_day - one_year
+
+    last_year_tobs = session.query(Measurement.date, Measurement.tobs).\
+        filter(Measurement.date >= year_ago).\
+        order_by(Measurement.date.desc()).all()
+        
+    temperature_obs = list(np.ravel(last_year_tobs))
+    
+    return jsonify(temperature_obs)
 
 # /api/v1.0/<start> and /api/v1.0/<start>/<end>
 
