@@ -153,7 +153,28 @@ def calc_starttemps(start_date):
     return session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
         filter(Measurement.date >= start_date).all()
 
+@app.route("/api/v1.0/<start>/<end>")
+def temp_start_end(start, end):
+    """When given the start only, calculate `TMIN`, `TAVG`, and `TMAX` 
+    for all dates greater than and equal to the start date."""
 
+    #start_string = dt.strptime(start,'%Y-%m-%d' )
+    startend_temps = []
+    trip_startend = calc_temps_startend(start, end)
+    trip_startend_list = trip_startend[0]
+    temp_min = trip_startend_list[0]
+    temp_avg = trip_startend_list[1]
+    temp_max = trip_startend_list[2]
+    temp_dict = dict({'Min': temp_min, 'Avg': temp_avg, 'Max': temp_max })
+    startend_temps.append(dict(temp_dict))
+    
+    #return jsonify(temp_dict)
+    return jsonify(temp_dict)
+
+def calc_temps_startend(start_date, end_date):
+      
+    return session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
+        filter(Measurement.date >= start_date).filter(Measurement.date <= end_date).all()
 
 if __name__ == "__main__":
     app.run(debug=True)
