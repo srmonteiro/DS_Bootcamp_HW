@@ -144,7 +144,7 @@ def app_start_date(start): # , end_date):
     temp_min = trip_start_list[0]
     temp_avg = trip_start_list[1]
     temp_max = trip_start_list[2]
-    temp_dict = dict({'Min': temp_min, 'Avg': temp_avg, 'Max': temp_max })
+    temp_dict = dict({'Min Temp': temp_min, 'Max Temp': temp_max, 'Avg Temp' : temp_avg, })
 
     return jsonify(temp_dict)
 
@@ -165,7 +165,7 @@ def temp_start_end(start, end):
     temp_min = trip_startend_list[0]
     temp_avg = trip_startend_list[1]
     temp_max = trip_startend_list[2]
-    temp_dict = dict({'Min': temp_min, 'Avg': temp_avg, 'Max': temp_max })
+    temp_dict = dict({'Min Temp': temp_min, 'Max Temp': temp_max, 'Avg Temp' : temp_avg, })
     startend_temps.append(dict(temp_dict))
     
     #return jsonify(temp_dict)
