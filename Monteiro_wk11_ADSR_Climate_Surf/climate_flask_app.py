@@ -90,8 +90,8 @@ def stations():
         station_dict = {}
         station_dict["id"] = Station.id
         station_dict["name"] = Station.name
-        station_dict["latitude"] = Station.latitude
-        station_dict["longitude"] = Station.longitude
+        station_dict["lat"] = Station.latitude
+        station_dict["long"] = Station.longitude
         station_dict["elevation"] = Station.elevation
         stations_json.append(station_dict)
     
@@ -144,7 +144,7 @@ def app_start_date(start): # , end_date):
     temp_min = trip_start_list[0]
     temp_avg = trip_start_list[1]
     temp_max = trip_start_list[2]
-    temp_dict = dict({'Min Temp': temp_min, 'Max Temp': temp_max, 'Avg Temp' : temp_avg, })
+    temp_dict = dict({'Min': temp_min, 'Avg': temp_avg, 'Max': temp_max })
 
     return jsonify(temp_dict)
 
