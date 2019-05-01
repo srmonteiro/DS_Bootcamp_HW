@@ -10,6 +10,14 @@ header{
     z-index: 1000;
 }
 
+nav{
+    background-color: #e3f2fd;
+}
+
+img{
+    padding: 10px;
+}
+
 body {
     background: yellow;
     color: #14171a;
