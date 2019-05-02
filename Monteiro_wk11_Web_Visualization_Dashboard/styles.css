@@ -14,12 +14,14 @@ nav{
     background-color: #e3f2fd;
 }
 
-img{
+.img-1{
     padding: 10px;
+    float: left;
+    position: relative; 
 }
 
-body {
-    background: yellow;
+.body {
+    background: black;
     color: #14171a;
     font-size: 14px;
     line-height: 20px;
