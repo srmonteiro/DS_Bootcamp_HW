@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Monteiro Visualization Portfolio</title>
+
+    <!-- Bring in our bootstrap stylesheet -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    
+  
+</head>
+<body class="body" id="page_background">
+        <header class="header">
+        <div class="container-fullwidth">
+            <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">    
+                        <nav class="navbar navbar-dark navbar-expand-lg text-nowrap text-right" style="background-color: #192f53;" >
+                            <a class="navbar-brand" href="index.html">Philanthropx</a>
+                            <div id="navbarSupportedContent">
+                                <ul class="nav navbar-nav text-right">
+                                    <li class="nav-item active text-right">
+                                        <a class="nav-link" href="index.html">Home
+                                            <span class="sr-only">(current)</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item dropdown text-right">
+                                        <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            viz
+                                        </a>
+                                            <div class="dropdown-menu text-muted" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item text-muted" href="#">latitude</a>
+                                                <a class="dropdown-item text-muted" href="#">revenue</a>
+                                                <a class="dropdown-item text-muted" href="#">per capita</a>
+                                                <a class="dropdown-item text-muted" href="#">power</a>
+                                            </div>
+                                    </li>
+                                    
+                                    <li class="nav-item text-right">
+                                        <a class="nav-link text-muted" href="comps.html">comps</a>
+                                    </li>
+                                    </li>
+                                    <li class="nav-item text-right">
+                                        <a class="nav-link text-muted" href="data.html">data</a>
+                                    </li>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+</header>
+                            
+        
+        <section class="container section pb-5">  
+            <div class="row justify-content-around">
+                <article class="col-xs-12 col-sm-12 col-md-7 article mt-5"> 
+                        <div class="body_box">
+                        <div class="row"> 
+                            <div class="col-12 border-bottom pt-3">
+                                <h1>Seeing like a Foundation</h1> 
+                            </div>
+                        
+                            <div class="col-12 pt-3">
+                                <img src="images/philanthropic_directions.png" width="60%" alt="Philanthropy Organization Revenue by Latitude" title="Philanthropy Organization Revenue by Latitude" class="img-fluid float-left image"/>
+                                    <p>This portfolio includes a set of data visualiztions created 
+                                        as a part of a data science bootcamp. While the website will 
+                                        need updates if it will ever serve as a public portfolio, 
+                                        I hope you enjoy my analysis of IRS 990 records (2017) will prove 
+                                        interseting, at least visually. I ambititously (or more accurately precociously)
+                                        set out to investigate a set of APIs, though the way I went about my project
+                                        meant looping through a lot of calls, and I got blocked!
+                                    </p>
+                                    <p>In the meantime, I'll present some agreggate data on philanthropic entities
+                                        in the US, based on IRS Nonprofit financial records. The one above is a 
+                                        riff on a weather data query (temp by latitude), but instead, the total
+                                        revenue of individual Philanthropic Organizations by Latitude of incorporation. 
+                                        While it might look like there's a slight trend toward revenue and  
+                                        philanthropic activity clusters around 40 degrees, you're mostly seeing
+                                        where large cities are in the US.
+                                        </p>
+                              <hr></hr>
+                                <p class ="pt-4">Reviewing the rest of the site, you will find visualizations for: 
+                                        </p>
+                                    <ul>
+                                        <li>Philanthropy Organization Revenue by Latitude</li>
+                                        <li>Philanthropic Organizations by Revenue Bracket</li>
+                                        <li>Philanthropy Revenue by State</li>
+                                        <li>A measure I term Philanthropic 'Power' by State</li>
+                                    </ul>
+                                <p>Also included in this dashboard are descriptions of observable trends based on the data. </p>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </article>
+
+                <aside class="col-xs-12 col-sm-12 col-md-4 aside mt-5 pb-3 align-self-start">  
+                        
+                            <div class="row">
+                                    <div class="body_box">
+
+                                            <div class="col-12 border-bottom pt-3">
+                                    <h1>Visualizations</h1>
+                                            </div>
+                                
+                            
+                                <div class ="contact-info col-12 pt-3 d-flex justify-content-around"> 
+                                    
+                                    <div class = "row">
+                                        <a href="windspeed.html">
+                                            <img src="images/philanthropic_directions.png" alt="Philanthropy Organization Revenue by Latitude" title="Philanthropy Organization Revenue by Latitude" width="80%" class="image"/>
+                                        </a>
+                                        <a href="cloudiness.html">
+                                                <img src="images/nonprofits_by_income.png" alt="Philanthropic Organizations by Revenue Bracket" title="Philanthropic Organizations by Revenue Bracket" width="80%" class="image"/>
+                                        </a>
+                                    </div>
+                                    <div class = "row">
+                                        <a href="humidity.html">
+                                                <img src="images/phil_rev_state.png" alt="Philanthropic Revenue by State" title="Philanthropy Organization Revenue by State" width="80%" class="image"/>
+                                        </a>
+                                        <a href="temperature.html">
+                                                <img src="images/phil_by_rev.png" alt="Philanthropic Power by State" title="Philanthropic Power by State" width="80%" class="image"/>
+                                        </a>
+                                        </div>
+                                    
+                               
+                            </div>
+                        </div>
+                    </div>
+                    </aside>
+            </div>
+            <!-- all images by Stephen Monteiro -->
+        </section>
+    </div>
+
+
+</body>
+
+<footer>
+        <div id="footer-strip"></div>
+          I did a thing. Stephen Monteiro 2019 (c) Copywrite Coding Bootcamp 2017
+      </footer>
+
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      
+
+</html>
