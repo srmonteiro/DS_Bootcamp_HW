@@ -8,6 +8,7 @@ import requests
 import pandas as pd
 from selenium import webdriver
 
+# Convert Jupyter notebook into a Python script called `scrape_mars.py` with a function called `scrape` that will execute all of your scraping code from above and return one Python dictionary containing all of the scraped data.
 
 def scrape():
     
@@ -48,16 +49,16 @@ def scrape():
     mars_facts_df.columns = ["Query", "Fax"]
     mars_facts_html_table = mars_facts_df.to_html() # 'Table/mars_html_table.html' -- to create previewable html
     mars_facts_html_table = mars_facts_html_table.replace("\n", "")
-    print(mars_html_table)
+    print(mars_facts_html_table)
 
 
   # Mars Hemispheres (5 of 5)
 
     executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
-    mars_hemispheres_browser = Browser('chrome', **executable_path, headless=False)
+    mars_hemispheres_base_img_browser = Browser('chrome', **executable_path, headless=False)
     mars_hemisphere_url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
-    mars_hemispheres_browser.visit(mars_hemisphere_url)
-    mars_hemisphere_html = mars_hemispheres_browser.html
+    mars_hemispheres_base_img_browser.visit(mars_hemisphere_url)
+    mars_hemisphere_html = mars_hemispheres_base_img_browser.html
     mars_hemisphere_html_soup = BeautifulSoup(mars_hemisphere_html, 'html.parser')
     hemispheres_imgs = mars_hemisphere_html_soup.find_all("div", class_="item")
     hemispheres_base_img_url = "https://astrogeology.usgs.gov"
@@ -69,8 +70,8 @@ def scrape():
         img_url = img.find("a")["href"]
         full_img_link = hemispheres_base_img_url + img_url 
 
-        hemispheres_base_img_browser.visit(full_img_link)
-        hemispheres_base_img_html = hemispheres_base_img_browser.html
+        mars_hemispheres_base_img_browser.visit(full_img_link)
+        hemispheres_base_img_html = mars_hemispheres_base_img_browser.html
         hemispheres_full_img_soup = BeautifulSoup(hemispheres_base_img_html, "html.parser")
         hemispheres_downloads = hemispheres_full_img_soup.find("div", class_="downloads")
         hemispheres_image_download_url = hemispheres_downloads.find("a")["href"]
@@ -86,7 +87,8 @@ def scrape():
         
   # Close the browser after scraping
 
-    browser.quit()
+    mars_img_browser.quit()
+    mars_hemispheres_base_img_browser.quit()
 
   # Return results
 
