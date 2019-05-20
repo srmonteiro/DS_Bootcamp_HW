@@ -7,19 +7,136 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mars News</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+     <style type="text/css">
+        .jumbotron {
+            background: none;             /* Transparent background */
+        }
+
+    </style> 
+   <div class="view" style="background-image: url('https://cdn.taschen.com/media/images/960/pr_rock_bowie_life_on_mars_1973_24371_1511251443_id_992983.png'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+
 </head>
 
+<!-- SCRAPER -->    
+    
 <body>
   <div class="container-fluid">
-    <div class="jumbotron text-center">
-      <h1>Mars Latest News</h1>
-      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get News!</a></p>
-    </div>
-    <h5>{{ mars_news.news_title }}</h5>
-    <p>{{ mars_news.news_p }}</p>
-    <img src="{{ mars_news.featured_img }}" alt="Mars Featured Image">
+        <div class="jumbotron text-center">
+              <h1>Life on Mars</h1>
+              <p><a class="btn btn-primary btn-lg" class="btn btn-outline-danger" href="/scrape" role="button">Is there life?</a>
+                </p>
+        </div>
+
+<!-- MARS NEWS -->   
+
+      
+            <div class="row">
+                <div class="col-md-5">
+                    <h3>{{ mars_dashboard.news_title }}</h3>
+                    <h5>{{ mars_dashboard.news_p }}</h5>
+                </div>
+                <div class="col-md-7">
+                </div>
+            </div>
+     
+      
+<!-- MARS FEATURED IMAGE -->
+      
+      
+            <div class="row">
+                <div class="col-md-5">
+                    <h3><b>Featured Image : </b></h3> 
+                    <img src="{{ mars_dashboard.featured_image_url }}" alt="Featured Picture of Mars">
+                </div>
+                    
+<!-- MARS CURRENT WEATHER -->
+                
+                <div class="col-md-5">
+                    <div class="card border border-dark mb-8">
+                      <div class="card-body">
+                        <h3 class="card-title">Current Weather on Mars:</h3>
+                        <p class="card-text">{{ mars_dashboard.mars_weather_readings }}</p>
+                      </div>
+                    </div>
+                    
+<!-- MARS FACTS TABLE -->
+                 
+                 
+                 <table border="1" class="table thead-dark"> 
+                     <thead class="thead-dark"> 
+                         <tr style="text-align: right;"> 
+                               <th scope="col">Query</th> 
+                               <th scope="col">Fax</th> 
+                         </tr> 
+                     </thead> 
+                     <tbody> 
+                         <tr> 
+                             <td>{{ mars_dashboard.eq_diam }}</td> 
+                             <td>{{ mars_dashboard.eq_diam_faq }}</td> 
+                         </tr> 
+                         <tr> 
+                             <td>{{ mars_dashboard.pl_diam }}</td> 
+                             <td>{{ mars_dashboard.pl_diam_faq }}</td> 
+                         </tr> 
+                         <tr> 
+                             <td>{{ mars_dashboard.mass }}</td> 
+                             <td>{{ mars_dashboard.mass_faq }}</td> 
+                         </tr> 
+                         <tr> 
+                             <td>{{ mars_dashboard.moons }}</td> 
+                             <td>2{{ mars_dashboard.moons_faq }}</td> 
+                         </tr> 
+                         <tr> 
+                             <td>{{ mars_dashboard.o_dist }}</td> 
+                             <td>{{ mars_dashboard.o_dist_faq }}</td> 
+                         </tr> 
+                         <tr> 
+                             <td>{{ mars_dashboard.o_period }}/td> 
+                             <td>{{ mars_dashboard.o_period_faq }}</td> 
+                         </tr> 
+                         <tr> 
+                             <td>{{ mars_dashboard.temp }}</td> 
+                             <td>{{ mars_dashboard.temp_faq }}</td> 
+                         </tr> 
+                         <tr> 
+                             <td>{{ mars_dashboard.first_rec }}</td> 
+                             <td>{{ mars_dashboard.first_rec_faq }}</td> 
+                         </tr> 
+                             <td>{{ mars_dashboard.rec_by }}</td> 
+                             <td>{{ mars_dashboard.rec_by_faq }}</td> 
+                         </tr> 
+                     </tbody>
+                 </table>                    
+                    
+                    
+                </div>
+                <div class="col-md-2">
+                    
+                </div>
+            </div>
+                 
+
+
+<!-- MARS HEMISPHERE IMAGE ... We may not have needed to do this -->
+    
+                <h3>Hemisphere Images :</h3>  
+                 
+                <img src="{{ mars_dashboard.hemispheres_imgs_one }}" alt="Mars Featured Image" width="300px">
+             </div>
   </div>
-  </div>
+<footer class="footer fixed-bottom">
+      <div class="container">
+          
+              <p class="text-right">I did a thing. Stephen Monteiro 2019 (c) Copywrite Coding Bootcamp 2017</p>
+          
+      </div>
+  </footer>
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
 </body>
 
 </html>

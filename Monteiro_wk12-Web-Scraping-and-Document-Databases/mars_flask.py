@@ -16,7 +16,7 @@ def home():
     mars_news_data = mongo.db.collection.find_one()
 
     # Return template and data
-    return render_template("index.html", mars_news=mars_news_data)
+    return render_template("index.html", mars_dashboard=mars_news_data)
 
 
 # Next, create a route called `/scrape` that will import your `scrape_mars.py` script and call your `scrape` function.
@@ -31,7 +31,7 @@ def scrape():
     mongo.db.collection.update({}, mars_dashboard, upsert=True)
 
     # Redirect back to home page
-    return redirect("/")
+    return redirect("/", code=302)
 
 
 if __name__ == "__main__":
