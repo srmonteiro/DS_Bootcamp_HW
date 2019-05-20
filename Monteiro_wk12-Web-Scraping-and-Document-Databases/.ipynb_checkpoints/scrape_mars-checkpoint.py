@@ -84,7 +84,8 @@ def scrape():
     hiu = []
     
     for img in hemispheres_imgs:
-        img_title = img.find("h3").text
+        img_title_raw = img.find("h3").text
+        img_title = img_title_raw.replace("Enhanced", "")
         img_url = img.find("a")["href"]
         full_img_link = hemispheres_base_img_url + img_url 
 
