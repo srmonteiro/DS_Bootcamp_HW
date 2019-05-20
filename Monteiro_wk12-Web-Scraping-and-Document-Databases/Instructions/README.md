@@ -113,3 +113,18 @@ To submit your work to BootCampSpot, create a new GitHub repository and upload t
 ## Copyright
 
 © 2019 Trilogy Education Services. All Rights Reserved.
+
+
+
+<!--
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Hemisphere Images :</h3>  
+                        {% for image in mars_dashboard.hemispheres_imgs_one %}
+                             <h5><b>{{image.img_title}}</b></h5>
+                             <img src="{{ image.img_url }}" alt="{{ image.img_title }}" width="300px">
+               </div>
+           </div> 
+
+-->

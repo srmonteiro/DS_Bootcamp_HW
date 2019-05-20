@@ -31,7 +31,7 @@ def scrape():
     mongo.db.collection.update({}, mars_dashboard, upsert=True)
 
     # Redirect back to home page
-    return redirect("/")
+    return redirect("/", code=302)
 
 
 if __name__ == "__main__":

@@ -81,6 +81,8 @@ def scrape():
 
     hemispheres_imgs_urls = []
     hemispheres_image_download_url = []
+    hiu = []
+    
     for img in hemispheres_imgs:
         img_title = img.find("h3").text
         img_url = img.find("a")["href"]
@@ -92,6 +94,7 @@ def scrape():
         hemispheres_downloads = hemispheres_full_img_soup.find("div", class_="downloads")
         hemispheres_image_download_url = hemispheres_downloads.find("a")["href"]
         hemispheres_imgs_urls.append({"title": img_title, "img_url": img_url})
+        hiu.append({"title": img_title, "img_url": hemispheres_image_download_url})
         hidu = hemispheres_image_download_url.split("\n")
     
     
@@ -103,6 +106,8 @@ def scrape():
         "mars_weather_readings": mwr[0],
         "mars_table": mars_facts_html_table,
         "hemispheres_imgs_one": hemispheres_image_download_url,
+        "hemispheres_imgs_urls": hemispheres_imgs_urls,
+        "hiu": hiu,
         "eq_diam": eq_diam,
         "pl_diam": pl_diam,
         "mass": mass,

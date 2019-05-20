@@ -26,12 +26,15 @@
               <p><a class="btn btn-primary btn-lg" class="btn btn-outline-danger" href="/scrape" role="button">Is there life?</a>
                 </p>
         </div>
+      </div>
 
 <!-- MARS NEWS -->   
 
       
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-3">
                     <h3>{{ mars_dashboard.news_title }}</h3>
                     <h5>{{ mars_dashboard.news_p }}</h5>
                 </div>
@@ -41,17 +44,20 @@
      
       
 <!-- MARS FEATURED IMAGE -->
-      
-      
+            
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-2">
+                </div>
+            <div class="row">
+                <div class="col-md-4">
+                 
                     <h3><b>Featured Image : </b></h3> 
-                    <img src="{{ mars_dashboard.featured_image_url }}" alt="Featured Picture of Mars">
+                    <img src="{{ mars_dashboard.featured_image_url }}" alt="Featured Picture of Mars" width="100%">
                 </div>
                     
 <!-- MARS CURRENT WEATHER -->
                 
-                <div class="col-md-5">
+                <div class="col-md-4">
                     <div class="card border border-dark mb-8">
                       <div class="card-body">
                         <h3 class="card-title">Current Weather on Mars:</h3>
@@ -61,12 +67,12 @@
                     
 <!-- MARS FACTS TABLE -->
                  
-                 
+                 <h3 class="card-title">Mars FAQs:</h3>
                  <table border="1" class="table thead-dark"> 
                      <thead class="thead-dark"> 
                          <tr style="text-align: right;"> 
                                <th scope="col">Query</th> 
-                               <th scope="col">Fax</th> 
+                               <th scope="col">Mars FAQs</th> 
                          </tr> 
                      </thead> 
                      <tbody> 
@@ -118,25 +124,100 @@
 
 
 <!-- MARS HEMISPHERE IMAGE ... We may not have needed to do this -->
+      
+      <div class="row">
+        <div class="col-md-2">    
+         </div>
+        <div class="col-md-10">    
+             <h3>Hemisphere Images :</h3> 
+         </div>
+       </div> 
     
-                <h3>Hemisphere Images :</h3>  
-                 
-                <img src="{{ mars_dashboard.hemispheres_imgs_one }}" alt="Mars Featured Image" width="300px">
-             </div>
-  </div>
-<footer class="footer fixed-bottom">
-      <div class="container">
-          
-              <p class="text-right">I did a thing. Stephen Monteiro 2019 (c) Copywrite Coding Bootcamp 2017</p>
-          
-      </div>
-  </footer>
+    
+       <div class="row">
+                   <div class="col-md-2">
+                   </div>
+                 <div class="col-md-4">  
+                         <div class="card">
+ <img src="{{ mars_dashboard.hiu[0]['img_url'] }}" class="card-img-top" alt="{{ mars_dashboard.hemispheres_imgs_urls[0]['title'] }}" width="100%">  
+                             
+<!-- mars_dashboard.hiu[0]['img_url'] -->
+                             
+                          <div class="card-body">
+                            <h3 class="card-title">{{ mars_dashboard.hemispheres_imgs_urls[0]['title'] }}<br> 
+                              
+                              </h3>
+                          </div>
+                        </div>
+                 </div>
+           
+                 <div class="col-md-4">  
+                         <div class="card">
+                          <img src="{{ mars_dashboard.hemispheres_imgs_one }}" class="card-img-top" alt="{{ mars_dashboard.hemispheres_imgs_urls[1]['title'] }}" width="100%">
+                          <div class="card-body">
+                            <h3 class="card-title">{{ mars_dashboard.hemispheres_imgs_urls[1]['title'] }}</h3>
+                          </div>
+                        </div>   
+                 </div>
+                    <div class="col-md-2">
+                   </div> 
+       </div>    
+                    
+    
+    
+       <div class="row">
+                 <div class="col-md-2">
+                   </div>
+                 <div class="col-md-4">  
+                         <div class="card">
+                          <img src="{{ mars_dashboard.hemispheres_imgs_one }}" class="card-img-top" alt="{{ mars_dashboard.hemispheres_imgs_urls[2]['title'] }}" width="100%">
+                          <div class="card-body">
+                            <h3 class="card-title">{{ mars_dashboard.hemispheres_imgs_urls[2]['title'] }}</h3>
+                          </div>
+                        </div>
+                 </div>
+           
+                 <div class="col-md-4">  
+                         <div class="card">
+                          <img src="{{ mars_dashboard.hemispheres_imgs_one }}" class="card-img-top" alt="{{ mars_dashboard.hemispheres_imgs_urls[3]['title'] }}" width="100%">
+                          <div class="card-body">
+                            <h3 class="card-title">{{ mars_dashboard.hemispheres_imgs_urls[3]['title'] }}</h3>
+                          </div>
+                        </div>   
+                 </div>
+                  <div class="col-md-2">
+                   </div>
+       </div>    
+                     
+
+      <div class="row">
+          <div class="col-md-12">
+                   </div>
+       </div> 
+                     
+                     
+     
+                     
+                     
+                     
+<!-- FOOTER ... We may not have needed to do this -->   
+    
+    <footer class="footer fixed-bottom">
+          <div class="container">
+
+                  <p class="text-right">I did a thing. Stephen Monteiro 2019 (c) Copywrite Coding Bootcamp 2017</p>
+
+          </div>
+     </footer>
 
   
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
 </body>
 
 </html>
+
+
+
