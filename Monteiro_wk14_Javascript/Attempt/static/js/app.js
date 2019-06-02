@@ -64,12 +64,9 @@ tableData.forEach(sighting => {
 
 // ----------------------------------------------------------------------------
 
-// Handles for the filter and query 
+// Let the QUERY begin!
 
 // ----------------------------------------------------------------------------
-
-// Select the filters from the Query Form
-var filters = d3.select('#filters')
 
 // Select filter button
 var filter_btn = d3.select("#filter-btn");
@@ -81,14 +78,13 @@ filter_btn.on("click", function(){
     d3.event.preventDefault();
 
     // Select query terms from the form
-    var dateQuery = d3.select("#datetime").select('input');
-    var dateValue = dateQuery.property("value");  
-    var cityQuery = d3.select("#city").select('input').value;
-    var stateQuery = d3.select("#state").select('input').value;
-    var countryQuery = d3.select("#country").select('input').value;
-    var shapeQuery = d3.select("#shape").select('input').value;
+    var dateQuery = d3.select("#datetime");
+    var cityQuery = d3.select("#city");
+    var stateQuery = d3.select("#state");
+    var countryQuery = d3.select("#country");
+    var shapeQuery = d3.select("#shape");
 
-    // console.log the query terms
+    // console.log the query terms ________________  I'm stuck on the filters so I'm procrastinating. 
     var queryTerms = { "Date" : dateQuery, 
                   "City" : cityQuery, 
                   "State" : stateQuery, 
@@ -96,14 +92,32 @@ filter_btn.on("click", function(){
                   "Shape" : shapeQuery}
     console.log(queryTerms);
 
-    if (queryTerms.dateValue == '') {
+    var dateValue = dateQuery.property("value");  
+    var cityValue = cityQuery.property("value");
+    var stateValue = stateQuery.property("value");
+    var countryValue = countryQuery.property("value");
+    var shapeValue = shapeQuery.property("value");
+
+    // Remove default dataTable with query results
+    d3.selectAll("tbody td").remove();
+    d3.selectAll("tbody tr").remove();
+
+    // IF No query terms, print the full table, ELSE query on ONE Search term
+    if ((queryTerms.dateValue == '' && 
+        queryTerms.cityValue == '' && 
+        queryTerms.stateValue == '' && 
+        queryTerms.countryValue == '' && 
+        queryTerms.shapeValue == '')) {
         var queryResults = tableData;
         }
+    // A better person, would build a better filter, but I am not that person today. 
     else {
-        var queryResults = tableData.filter(sighting => sighting.datatime == dateValue);
+        var queryResults = tableData.filter(sighting => sighting.datetime == dateValue || 
+                                                        sighting.city == cityValue || 
+                                                        sighting.state == stateValue || 
+                                                        sighting.country == countryValue || 
+                                                        sighting.shape == shapeValue);
         }
-
-
 
     // Add the filtered data to the table body
     queryResults.forEach(sighting => {
