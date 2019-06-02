@@ -23,23 +23,38 @@
 
 // My CODE HERE! 
 
+// --------------------------------------
+
+// GET A HANDLE ON EVERYTHING
+
 // from data.js
 var tableData = data;
 
 // Select the table body
 var tbody = d3.select("tbody");
 
-// Query tableData,
-data.forEach(function(tableData) {
+// Select the filters from the Query Form
+var filters = d3.select('#filters')
 
-    // Console Log Data
-    console.log(tableData);
+// Select filter button
+var queryButton = d3.select("#filter-btn");
+
+// --------------------------------------
+
+// MAKE THE tableData APPEAR ON THE PAGE BEFORE ANY QUERIES ARE ENTERED
+
+// Query tableData for each sighting
+tableData.forEach(sighting => {
+
+    // Query tableData for the Sighting
+    // Console Log Data in json like format
+    console.log(sighting);
 
     // Create new row in table body
     var row = tbody.append("tr");
     
     // Query tableData for the Sighting
-    Object.entries(tableData).forEach(function([key, value]) {
+    Object.entries(sighting).forEach(function([key, value]) {
 
         // Append a cell to the row for each value in the Sighting
         var cell = row.append("td");
@@ -48,8 +63,9 @@ data.forEach(function(tableData) {
     });
 });
 
-// Select filter button
-var queryButton = d3.select("#filter-btn");
+// --------------------------------------
+
+
 
 // On click, generate new table with filter query
 queryButton.on("click", function(){
