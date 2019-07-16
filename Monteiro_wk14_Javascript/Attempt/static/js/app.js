@@ -83,6 +83,7 @@ filter_btn.on("click", function(){
     var stateQuery = d3.select("#state");
     var countryQuery = d3.select("#country");
     var shapeQuery = d3.select("#shape");
+    console.log(dateQuery);
 
     // console.log the query terms ________________  I'm stuck on the filters so I'm procrastinating. 
     var queryTerms = { "Date" : dateQuery, 
@@ -136,4 +137,3 @@ filter_btn.on("click", function(){
     document.getElementById("shape").value = '';
         
   });
-
